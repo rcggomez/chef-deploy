@@ -1,0 +1,51 @@
+{
+  "revision_id": "ce596a05d05153d62071366503e22d62fb2165bcfe946352f8b5aaaa6d8e146b",
+  "name": "sai_deploy",
+  "run_list": [
+    "recipe[sai_deploy::default]"
+  ],
+  "included_policy_locks": [
+
+  ],
+  "cookbook_locks": {
+    "sai_deploy": {
+      "version": "0.1.0",
+      "identifier": "dcea1b9736696fa0a2d64b80aabdcb584e9ffa9e",
+      "dotted_decimal_identifier": "62181899098286447.45215037547129533.223580136667806",
+      "source": "sai_deploy",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": null,
+        "revision": null,
+        "working_tree_clean": true,
+        "published": false,
+        "synchronized_remote_branches": [
+
+        ]
+      },
+      "source_options": {
+        "path": "sai_deploy"
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "sai_deploy",
+        ">= 0.0.0"
+      ]
+    ],
+    "dependencies": {
+      "sai_deploy (0.1.0)": [
+
+      ]
+    }
+  }
+}
