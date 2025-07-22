@@ -40,32 +40,49 @@ cookbook_file '/tmp/schema.sql' do
   mode '0644'
 end
 
-# Crear base de datos
-execute 'create database' do
-  command "sudo -u postgres psql -c \"DROP DATABASE IF EXISTS db_sai_alterno; CREATE DATABASE db_sai_alterno WITH OWNER postgres;\""
-end
-
-# Asignar contraseña al usuario postgres (solo si no tiene)
-execute 'set postgres user password' do
-  command "sudo -u postgres psql -c \"ALTER USER postgres WITH PASSWORD 'admin';\""
-  # Esta condición evita reasignar la contraseña si ya está establecida
-  not_if "sudo -u postgres psql -tAc \"SELECT 1 FROM pg_shadow WHERE usename='postgres' AND passwd IS NOT NULL\" | grep 1"
-end
-
-# Restaurar esquema en la base de datos
-execute 'restore schema' do
-  command "sudo -u postgres psql -d db_sai_alterno -f /tmp/schema.sql"
+# SECCIÓN POSTGRESQL MEJORADA
+bash 'setup_postgresql' do
+  user 'root'
+  code <<-EOH
+    # Comandos separados para evitar problemas de transacción
+    sudo -u postgres psql -c "DROP DATABASE IF EXISTS db_sai_alterno"
+    sudo -u postgres psql -c "CREATE DATABASE db_sai_alterno WITH OWNER postgres"
+    
+    # Configurar contraseña solo si es necesario
+    if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_shadow WHERE usename='postgres' AND passwd IS NOT NULL" | grep -q 1; then
+      sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'admin'"
+    fi
+    
+    # Restaurar esquema
+    sudo -u postgres psql -d db_sai_alterno -f /tmp/schema.sql
+  EOH
 end
 
 # Instalar dependencias npm
 execute 'npm install' do
   cwd '/opt/sai_alterno'
   command 'npm install'
+  environment 'PATH' => "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 end
 
-# Ejecutar aplicación en background
-execute 'start app' do
+# Ejecutar aplicación en background usando PM2 (recomendado)
+execute 'install pm2' do
+  command 'npm install -g pm2'
+  not_if 'which pm2'
+end
+
+execute 'start app with pm2' do
   cwd '/opt/sai_alterno'
-  command 'npm start &'
+  command 'pm2 start npm --name "sai_alterno" -- start'
+  not_if 'pm2 list | grep sai_alterno'
 end
 
+# Configurar inicio automático
+execute 'pm2 startup' do
+  command 'pm2 startup'
+  not_if 'pm2 status | grep "online"'
+end
+
+execute 'pm2 save' do
+  command 'pm2 save'
+end
