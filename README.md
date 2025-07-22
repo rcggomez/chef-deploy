@@ -1,6 +1,6 @@
- 📦 sai_deploy
+# 📦 sai_deploy
 
-Automatización del despliegue de una aplicación Node.js con base de datos PostgreSQL utilizando **Chef Workstation** en modo local.
+#Automatización del despliegue de una aplicación Node.js con base de datos PostgreSQL utilizando **Chef Workstation** en modo local.
 
 ## 🚀 Características principales
 - Instalación automatizada de Node.js (v18.x)
