@@ -81,6 +81,9 @@ sudo chef-solo -c solo.rb -o 'recipe[sai_deploy]'
 ```
 ###🔍 Verificación del despliegue
 ```bash
+# Ejecutar el deploy
+sudo chef-solo -c solo.rb -o 'recipe[sai_deploy::deploy_app]'
+
 # Verificar estado de la aplicación
 pm2 list
 
@@ -90,6 +93,5 @@ sudo -u postgres psql -d db_sai_alterno -c "\dt"
 # Verificar servicio
 curl http://localhost:3000/health
 
-# Ejecutar el deploy
-sudo chef-solo -c solo.rb -o 'recipe[sai_deploy::deploy_app]'
+
 ```
