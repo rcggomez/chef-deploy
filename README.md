@@ -54,9 +54,9 @@ sai_deploy/
    ```
    git clone https://github.com/tu-usuario/sai_deploy.git
   ```
-
+```
 Inicia tu VM Ubuntu y copia los archivos:
----
+
 ```
 scp -r sai_deploy/ usuario@ip-vm:/home/usuario/
 ```
@@ -65,21 +65,23 @@ Ejecuta las recetas:
 ```
 sudo chef-solo -c /home/usuario/sai_deploy/solo.rb -o 'recipe[sai_deploy]'
 ```
-##Opción 2: Despliegue en AWS EC2
+### Opción 2: Despliegue en AWS EC2
 Crea una instancia EC2 con Ubuntu 20.04+
 
 Conéctate via SSH:
 
-bash
+```bash
 ssh -i "tu-key.pem" ubuntu@ec2-ip
+```
 Clona y ejecuta:
 
-bash
+```bash
 git clone https://github.com/tu-usuario/sai_deploy.git
 cd sai_deploy
 sudo chef-solo -c solo.rb -o 'recipe[sai_deploy]'
-🔍 Verificación del despliegue
-bash
+```
+###🔍 Verificación del despliegue
+```bash
 # Verificar estado de la aplicación
 pm2 list
 
@@ -89,7 +91,6 @@ sudo -u postgres psql -d db_sai_alterno -c "\dt"
 # Verificar servicio
 curl http://localhost:3000/health
 
-
-
 # Ejecutar el deploy
 sudo chef-solo -c solo.rb -o 'recipe[sai_deploy::deploy_app]'
+```
