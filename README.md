@@ -54,12 +54,12 @@ sai_deploy/
    ```
    git clone https://github.com/tu-usuario/sai_deploy.git
  
-Inicia tu VM Ubuntu y copia los archivos:
+2. Inicia tu VM Ubuntu y copia los archivos:
 
 ```
 scp -r sai_deploy/ usuario@ip-vm:/home/usuario/
 ```
-Ejecuta las recetas:
+3. Ejecuta las recetas:
 
 ```
 sudo chef-solo -c /home/usuario/sai_deploy/solo.rb -o 'recipe[sai_deploy]'
@@ -67,12 +67,12 @@ sudo chef-solo -c /home/usuario/sai_deploy/solo.rb -o 'recipe[sai_deploy]'
 ### Opción 2: Despliegue en AWS EC2
 Crea una instancia EC2 con Ubuntu 20.04+
 
-Conéctate via SSH:
+1. Conéctate via SSH:
 
 ```bash
 ssh -i "tu-key.pem" ubuntu@ec2-ip
 ```
-Clona y ejecuta:
+2. Clona y ejecuta:
 
 ```bash
 git clone https://github.com/tu-usuario/sai_deploy.git
