@@ -51,9 +51,9 @@ sai_deploy/
 
 ### Opción 1: Despliegue en VM local
 1. Clona el repositorio:
-   ```
-   git clone https://github.com/tu-usuario/sai_deploy.git
- 
+```
+git clone https://github.com/tu-usuario/sai_deploy.git
+``` 
 2. Inicia tu VM Ubuntu y copia los archivos:
 
 ```
