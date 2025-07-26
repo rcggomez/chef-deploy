@@ -18,6 +18,7 @@
   - Servidores físicos
 
 ## 📁 Estructura del proyecto
+```
 sai_deploy/
 ├── cookbooks/
 │ └── sai_deploy/
@@ -35,6 +36,7 @@ sai_deploy/
 │ └── metadata.rb
 ├── solo.rb
 └── README.md
+```
 
 ## ⚙️ Requisitos previos
 - [Chef Workstation](https://downloads.chef.io/) instalado
@@ -49,19 +51,21 @@ sai_deploy/
 
 ### Opción 1: Despliegue en VM local
 1. Clona el repositorio:
-   ```bash
+   ```
    git clone https://github.com/tu-usuario/sai_deploy.git
+  ```
 
-
-nicia tu VM Ubuntu y copia los archivos:
-
-bash
+Inicia tu VM Ubuntu y copia los archivos:
+---
+```
 scp -r sai_deploy/ usuario@ip-vm:/home/usuario/
+```
 Ejecuta las recetas:
 
-bash
+```
 sudo chef-solo -c /home/usuario/sai_deploy/solo.rb -o 'recipe[sai_deploy]'
-Opción 2: Despliegue en AWS EC2
+```
+##Opción 2: Despliegue en AWS EC2
 Crea una instancia EC2 con Ubuntu 20.04+
 
 Conéctate via SSH:
