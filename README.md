@@ -53,8 +53,7 @@ sai_deploy/
 1. Clona el repositorio:
    ```
    git clone https://github.com/tu-usuario/sai_deploy.git
-  ```
-```
+ 
 Inicia tu VM Ubuntu y copia los archivos:
 
 ```
